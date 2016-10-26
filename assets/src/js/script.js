@@ -17,11 +17,11 @@
 	$(function() {
 
 		// initial functions 
-		FBZ.control.readFromGoogleDocs();
-		FBZ.control.determineSection();
-		FBZ.control.onResizeStage();
-		FBZ.control.defineStage();
-		FBZ.control.resizeContentBlock();
+		// FBZ.control.readFromGoogleDocs();
+
+		// triggers the init func
+			FBZ.control.init();
+			
 
 	});// END DOC READY
 	
@@ -64,7 +64,17 @@
 	FBZ.control = {
 		// add function here
 		init : function () {
+
 			console.debug('FabzOff is running');
+
+			FBZ.control.multilingualEngine(); 
+			FBZ.control.removeLoadingCurtain();
+			//FBZ.control.updateLanguage();
+			FBZ.control.determineSection();
+			FBZ.control.onResizeStage();
+			FBZ.control.defineStage();
+			FBZ.control.resizeContentBlock();
+
 		},
 
 		detectPlatform : function () {
@@ -154,11 +164,7 @@
 		},
 		parseBrain : function () {
 
-			// triggers the init func
-			FBZ.control.init();
-			FBZ.control.multilingualEngine(); 
-			FBZ.control.removeLoadingCurtain();
-			//FBZ.control.updateLanguage();
+
 		},
 
 		fadeHide : function (el) { 
@@ -182,22 +188,10 @@
 			}, 701);
 		},
 
-
-		readFromGoogleDocs : function () { 
-
-			// https://docs.google.com/spreadsheets/d/1T0qB23t_Lc17VrtnybisyjVsfufbM3trJ9QGNjJUspo/pubhtml
-
-			Tabletop.init( { key: 'https://docs.google.com/spreadsheets/d/1T0qB23t_Lc17VrtnybisyjVsfufbM3trJ9QGNjJUspo/pubhtml',
-				callback: function(data, tabletop) { 
-					console.dir(data) 
-					FBZ.model.noBrain = data;
-					FBZ.control.parseBrain();
-				} } )
-		},
-
 		multilingualEngine : function () {
 
-			// multilingual plugin config . 
+			// multilingual plugin config . to use multilingual eng esp. just include the attribute data-translatable in the tag and separate the content with // 
+			// example  <p data-translatable> hola // hi </p>
 
 			i18n = window.domI18n({
 				selector: '[data-translatable]',
